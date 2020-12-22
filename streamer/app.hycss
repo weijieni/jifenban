@@ -1,0 +1,75 @@
+.container {
+    display: flex;
+    height: 100%;
+    background: black;
+    
+}
+
+.data{
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+.mesContainer {
+    display: flex;
+    height: 100%;
+}
+
+.label {
+    font-size: 30px;
+    color: white;
+    display: inline-block;
+    float: left;
+    margin: 15px 0px 0px 15px;
+}
+.section {
+    margin: 15px;
+    display: inline-block;
+    float: left;
+    width: 100%;
+}
+
+.input {
+    width: 400px;
+    height: 60px;
+    border: gray solid 3px;
+    border-radius: 20px; 
+    display: flex;
+    float: left;
+    text-alignment: center;
+}
+
+.button {
+    height: 60px;
+    width: 300px;
+    background-color: rgb(253, 69, 69);
+    border-radius: 50px;
+    display: flex;
+    float: left;
+    margin-left: 30px;
+    text-alignment: center;
+    padding: 0;
+}
+
+.board {
+    height: 150px;
+    width: 1100px;
+    border: 2px white solid;
+    border-collapse: collapse;
+}
+
+.texts {
+    border: 2px white solid;
+    border-collapse: collapse;
+    font-size:18px;
+    color:#ffffff;
+    font-weight: bold;
+}
+
+.logo {
+    border: 2px white solid;
+    border-collapse: collapse;
+    background-color: #dc1832;
+    width: 56px;
+    align-items: center;
+}
