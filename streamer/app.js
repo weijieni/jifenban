@@ -6,11 +6,13 @@ const hyExt = global.hyExt;
 
 const { View, Text, Button, Input} = UI
 
+let args = []
+
 class App extends Component {
 
   constructor () {
     super()
-
+    
     this.state = {
       wb: false, // 代码是否处于独立白板模式
       wbData: '', // 发送到独立白板的数据，驱动独立白板进行视图更新
@@ -23,18 +25,8 @@ class App extends Component {
       playerNameOne: '',
       playerNameTwo: '',
       playerMarkOne: '',
-      playerMarkTwo: '',
-      boardData: [
-        {id: 'clubNameOne', data: ''},
-        {id: 'clubNameTwo', data: ''},
-        {id: 'clubMarkOne', data: ''},
-        {id: 'clubMarkTwo', data: ''},
-        {id: 'playerNameOne', data: ''},
-        {id: 'playerNameTwo', data: ''},
-        {id: 'playerMarkOne', data: ''},
-        {id: 'playerMarkTwo', data: ''},
-      ]
-}
+      playerMarkTwo: ''
+    }
 
     // 调用sdk获取初始化参数的api，判断是否处于独立白板模式
     if (typeof hyExt.env.getInitialParam === 'function') {
@@ -47,8 +39,8 @@ class App extends Component {
           // 监听从原来小程序发送过来的独立白板数据
           hyExt.stream.onExtraWhiteBoardMessage({
             // 接收到数据，刷新视图
-            callback: (data) => {this.setState({ 
-              board: data
+            callback: data => {this.setState({ 
+              args: [data]
             })}
           })
         }
@@ -56,6 +48,7 @@ class App extends Component {
     }
   }
 
+   
   emitMessage(msg){
     console.log("[message]");
     hyExt.observer.emit('message-push',msg).then((res)=>{
@@ -73,24 +66,24 @@ class App extends Component {
     if(this.state.wbId){
       hyExt.stream.sendToExtraWhiteBoard({
         wbId,
-        data: clubNameOne,
+        data: this.args,
       })
       console.log("发送到独立白板成功");
     }
   }
 
-  sendClubNameTwo () {
-    let { clubNameTwo, wbId } = this.state
-    this.emitMessage(clubNameTwo);
-    // 发送数据到独立白板
-    if(this.state.wbId){
-      hyExt.stream.sendToExtraWhiteBoard({
-        wbId,
-        data2: clubNameTwo
-      })
-      console.log("发送到独立白板成功");
-    }
-  }
+  // // sendClubNameTwo () {
+  //   let { clubNameTwo, wbId } = this.state
+  //   this.emitMessage(clubNameTwo);
+  //   // 发送数据到独立白板
+  //   if(this.state.wbId){
+  //     hyExt.stream.sendToExtraWhiteBoard({
+  //       wbId,
+  //       data2: clubNameTwo
+  //     })
+  //     console.log("发送到独立白板成功");
+  //   }
+  // }
 
   createWb () {
     let width = Number(this.state.width) || 1100
@@ -123,49 +116,45 @@ class App extends Component {
       
       <View className='container'>
         <table className='board'>
-          <tr>
-            <td className="texts">俱乐部一：<text>{this.state.clubNameOne || ''}</text></td>
-            <td colSpan={5} className="texts">俱乐部得分：</td>
-            <td rowSpan={3} className="logo"><img src={require('../img/logo.png')} alt="" style = {{width: 46, height: 56, padding: 0}}/> </td>
-            <td colSpan={5} className="texts">俱乐部得分：</td>
-            <td className="texts">俱乐部二：<text>{this.state.clubNameTwo || ''}</text></td>
+          <tr className = 'row'>
+            <td className="titles"><text className = 'texts'>俱乐部一：{this.state.clubNameOne || ''}</text></td>
+            <td colSpan={5} className="units"><text className = 'texts'>俱乐部得分:</text></td>
+            <td rowSpan={3} className="logo"><img className = 'img' src={require('../img/logo.jpg')} alt="" /> </td>
+            <td colSpan={5} className="units"><text className = 'texts'>俱乐部得分:</text></td>
+            <td className="titles"><text className = 'texts'>俱乐部二:</text><text>{this.state.clubNameTwo || ''}</text></td>
           </tr>
-          <tr>
-            <td className="texts">选手个人得分：</td>
-            <td className="texts"><img src={require('../img/silver.png')} alt="" style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/silver.png')} alt="" style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/silver.png')} alt="" style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/silver.png')} alt="" style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/gold.png')} alt=""   style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/gold.png')} alt=""   style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/silver.png')} alt="" style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/silver.png')} alt="" style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/silver.png')} alt="" style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts"><img src={require('../img/silver.png')} alt="" style = {{width: 15, height: 15, padding: 0}}></img></td>
-            <td className="texts">选手个人得分：</td>
+          <tr className = 'row'>
+            <td className="units"><text className = 'texts'>选手得分：</text></td>
+            <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/gold.png')} alt=""   ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/gold.png')} alt=""   ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
+            <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
+            <td className="units"><text className = 'texts'>选手得分：</text></td>
           </tr>
-          <tr>
-            <td className="texts">选手：</td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts"></td>
-            <td className="texts">选手：</td>
+          <tr className = 'row'>
+            <td className="units"><text className = 'texts'>选手：</text></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"></td>
+            <td className="units"><text className = 'texts'>选手：</text></td>
           </tr>
         </table>
-        <View className="data">
-          <Text>
-            {this.state.wbMsg || ''}
-          </Text>
+
         <View className='section'>
           <Button className='button' onPress={() => this.createWb()}>创建记分板</Button>
-        </View>
         </View>
           <Text className='label'>俱乐部一名称</Text>
           <View className='section'>

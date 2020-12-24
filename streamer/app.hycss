@@ -52,24 +52,52 @@
 }
 
 .board {
-    height: 150px;
-    width: 1100px;
-    border: 2px white solid;
+    margin-left: 4px;
+    margin-top: 4px;
+    height: 140px;
+    width: 1085px;
     border-collapse: collapse;
+}
+
+.row {
+    width: 100%;
+    height: 33%;
+    border: 2px white solid; 
+    border-collapse: collapse;
+}
+
+.units {
+    width: 2.2%;
+    height: 33%;
+    border: 2px white solid; 
+}
+
+.titles {
+    width: 10%;
+    height: 33%;
+    border: 2px white solid; 
 }
 
 .texts {
-    border: 2px white solid;
-    border-collapse: collapse;
-    font-size:18px;
+    font-size:20px;
     color:#ffffff;
     font-weight: bold;
+    margin-left: 6px;
+    display: flex;
+    align-items: center;
 }
 
 .logo {
-    border: 2px white solid;
-    border-collapse: collapse;
-    background-color: #dc1832;
-    width: 56px;
-    align-items: center;
+    width: 5%;
+    border: 2px white solid; 
+    background: #dc1832;
 }
+
+.img {
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+}
+
