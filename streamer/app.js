@@ -6,8 +6,6 @@ const hyExt = global.hyExt;
 
 const { View, Text, Button, Input} = UI
 
-let args = []
-
 class App extends Component {
 
   constructor () {
@@ -25,8 +23,21 @@ class App extends Component {
       playerNameOne: '',
       playerNameTwo: '',
       playerMarkOne: '',
-      playerMarkTwo: ''
+      playerMarkTwo: '',
+      board:[]
     }
+
+    this.setState({
+      board: [
+        this.state.clubNameOne, 
+        this.state.clubNameTwo, 
+        // this.state.playerMarkOne,  
+        // this.state.clubMarkTwo, 
+        // this.state.playerNameOne, 
+        // this.state.playerMarkOne, 
+        // this.state.playerMarkTwo
+      ]
+    })
 
     // 调用sdk获取初始化参数的api，判断是否处于独立白板模式
     if (typeof hyExt.env.getInitialParam === 'function') {
@@ -40,7 +51,7 @@ class App extends Component {
           hyExt.stream.onExtraWhiteBoardMessage({
             // 接收到数据，刷新视图
             callback: data => {this.setState({ 
-              args: [data]
+              board: [data]
             })}
           })
         }
@@ -50,7 +61,7 @@ class App extends Component {
 
    
   emitMessage(msg){
-    console.log("[message]");
+    console.log(msg);
     hyExt.observer.emit('message-push',msg).then((res)=>{
       console.log("向客户端小程序广播信息成功！")}
     ).catch((err)=>{
@@ -60,30 +71,58 @@ class App extends Component {
 
   sendClubNameOne () {
     
-    let { clubNameOne, wbId } = this.state
-    this.emitMessage(clubNameOne);
+    let { wbId, board } = this.state
+    this.setState({
+      board: [
+        this.state.clubNameOne, 
+        this.state.clubNameTwo, 
+        // this.state.playerMarkOne,  
+        // this.state.clubMarkTwo,
+        // this.state.playerNameOne, 
+        // this.state.playerMarkOne, 
+        // this.state.playerMarkTwo
+      ]
+    })
+    this.emitMessage(board)
     // 发送数据到独立白板
     if(this.state.wbId){
       hyExt.stream.sendToExtraWhiteBoard({
         wbId,
-        data: this.args,
-      })
+        data: JSON.stringify(board[0]),
+        // data: board
+      }).catch(
+        (err)=>{console.log(err)}
+      )
       console.log("发送到独立白板成功");
     }
   }
 
-  // // sendClubNameTwo () {
-  //   let { clubNameTwo, wbId } = this.state
-  //   this.emitMessage(clubNameTwo);
-  //   // 发送数据到独立白板
-  //   if(this.state.wbId){
-  //     hyExt.stream.sendToExtraWhiteBoard({
-  //       wbId,
-  //       data2: clubNameTwo
-  //     })
-  //     console.log("发送到独立白板成功");
-  //   }
-  // }
+  sendClubNameTwo () {
+    let { wbId, board } = this.state
+    this.setState({
+      board: [
+        this.state.clubNameOne, 
+        this.state.clubNameTwo, 
+        // this.state.playerMarkOne,  
+        // this.state.clubMarkTwo,
+        // this.state.playerNameOne, 
+        // this.state.playerMarkOne, 
+        // this.state.playerMarkTwo
+      ]
+    })
+    this.emitMessage(board)
+    // 发送数据到独立白板
+    if(this.state.wbId){
+      hyExt.stream.sendToExtraWhiteBoard({
+        wbId,
+        data: JSON.stringify(board[1]),
+        // data: board
+      }).catch(
+        (err)=>{console.log(err)}
+      )
+      console.log("发送到独立白板成功");
+    }
+  }
 
   createWb () {
     let width = Number(this.state.width) || 1100
@@ -117,11 +156,11 @@ class App extends Component {
       <View className='container'>
         <table className='board'>
           <tr className = 'row'>
-            <td className="titles"><text className = 'texts'>俱乐部一：{this.state.clubNameOne || ''}</text></td>
+            <td className="titles"><text className = 'texts'>俱乐部一：{this.state.board[0] || ''}</text></td>
             <td colSpan={5} className="units"><text className = 'texts'>俱乐部得分:</text></td>
             <td rowSpan={3} className="logo"><img className = 'img' src={require('../img/logo.jpg')} alt="" /> </td>
             <td colSpan={5} className="units"><text className = 'texts'>俱乐部得分:</text></td>
-            <td className="titles"><text className = 'texts'>俱乐部二:</text><text>{this.state.clubNameTwo || ''}</text></td>
+            <td className="titles"><text className = 'texts'>俱乐部二: {this.state.board[0] || ''}</text></td>
           </tr>
           <tr className = 'row'>
             <td className="units"><text className = 'texts'>选手得分：</text></td>
