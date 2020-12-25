@@ -31,11 +31,12 @@ class App extends Component {
       board: [
         this.state.clubNameOne, 
         this.state.clubNameTwo, 
-        // this.state.playerMarkOne,  
-        // this.state.clubMarkTwo, 
-        // this.state.playerNameOne, 
-        // this.state.playerMarkOne, 
-        // this.state.playerMarkTwo
+        this.state.clubMarkOne,  
+        this.state.clubMarkTwo, 
+        this.state.playerNameOne, 
+        this.state.playerNameTwo,
+        this.state.playerMarkOne, 
+        this.state.playerMarkTwo
       ]
     })
 
@@ -51,7 +52,7 @@ class App extends Component {
           hyExt.stream.onExtraWhiteBoardMessage({
             // 接收到数据，刷新视图
             callback: data => {this.setState({ 
-              board: [data]
+              board: JSON.parse(data)
             })}
           })
         }
@@ -69,18 +70,19 @@ class App extends Component {
     });
   }
 
-  sendClubNameOne () {
+  sendData () {
     
     let { wbId, board } = this.state
     this.setState({
       board: [
         this.state.clubNameOne, 
         this.state.clubNameTwo, 
-        // this.state.playerMarkOne,  
-        // this.state.clubMarkTwo,
-        // this.state.playerNameOne, 
-        // this.state.playerMarkOne, 
-        // this.state.playerMarkTwo
+        this.state.clubMarkOne,  
+        this.state.clubMarkTwo,
+        this.state.playerNameOne, 
+        this.state.playerNameTwo,
+        this.state.playerMarkOne, 
+        this.state.playerMarkTwo
       ]
     })
     this.emitMessage(board)
@@ -88,41 +90,14 @@ class App extends Component {
     if(this.state.wbId){
       hyExt.stream.sendToExtraWhiteBoard({
         wbId,
-        data: JSON.stringify(board[0]),
+        data: JSON.stringify(board),
         // data: board
       }).catch(
         (err)=>{console.log(err)}
       )
       console.log("发送到独立白板成功");
     }
-  }
-
-  sendClubNameTwo () {
-    let { wbId, board } = this.state
-    this.setState({
-      board: [
-        this.state.clubNameOne, 
-        this.state.clubNameTwo, 
-        // this.state.playerMarkOne,  
-        // this.state.clubMarkTwo,
-        // this.state.playerNameOne, 
-        // this.state.playerMarkOne, 
-        // this.state.playerMarkTwo
-      ]
-    })
-    this.emitMessage(board)
-    // 发送数据到独立白板
-    if(this.state.wbId){
-      hyExt.stream.sendToExtraWhiteBoard({
-        wbId,
-        data: JSON.stringify(board[1]),
-        // data: board
-      }).catch(
-        (err)=>{console.log(err)}
-      )
-      console.log("发送到独立白板成功");
-    }
-  }
+  }  
 
   createWb () {
     let width = Number(this.state.width) || 1100
@@ -134,6 +109,16 @@ class App extends Component {
     }).then(({ wbId }) => {
       // 返回独立白板id，发送数据的时候需要带上这个参数
       this.state.wbId = wbId
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
+  removeWb () {
+    hyExt.stream.removeExtraWhiteBoard(this.state.wbId).then(() => {
+      this.setState({
+        wbId:''
+      })
     }).catch((err)=>{
       console.log(err)
     })
@@ -157,13 +142,13 @@ class App extends Component {
         <table className='board'>
           <tr className = 'row'>
             <td className="titles"><text className = 'texts'>俱乐部一：{this.state.board[0] || ''}</text></td>
-            <td colSpan={5} className="units"><text className = 'texts'>俱乐部得分:</text></td>
+            <td colSpan={5} className="units"><text className = 'texts'>俱乐部得分:{this.state.board[2] || ''}</text></td>
             <td rowSpan={3} className="logo"><img className = 'img' src={require('../img/logo.jpg')} alt="" /> </td>
-            <td colSpan={5} className="units"><text className = 'texts'>俱乐部得分:</text></td>
-            <td className="titles"><text className = 'texts'>俱乐部二: {this.state.board[0] || ''}</text></td>
+            <td colSpan={5} className="units"><text className = 'texts'>俱乐部得分:{this.state.board[3] || ''}</text></td>
+            <td className="titles"><text className = 'texts'>俱乐部二: {this.state.board[1] || ''}</text></td>
           </tr>
           <tr className = 'row'>
-            <td className="units"><text className = 'texts'>选手得分：</text></td>
+            <td className="units"><text className = 'texts'>选手得分：{this.state.board[6] || ''}</text></td>
             <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
             <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
             <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
@@ -174,10 +159,10 @@ class App extends Component {
             <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
             <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
             <td className="units"><img className = 'img'src={require('../img/silver.png')} alt="" ></img></td>
-            <td className="units"><text className = 'texts'>选手得分：</text></td>
+            <td className="units"><text className = 'texts'>选手得分：{this.state.board[7] || ''}</text></td>
           </tr>
           <tr className = 'row'>
-            <td className="units"><text className = 'texts'>选手：</text></td>
+            <td className="units"><text className = 'texts'>选手：{this.state.board[4] || ''}</text></td>
             <td className="units"></td>
             <td className="units"></td>
             <td className="units"></td>
@@ -188,25 +173,50 @@ class App extends Component {
             <td className="units"></td>
             <td className="units"></td>
             <td className="units"></td>
-            <td className="units"><text className = 'texts'>选手：</text></td>
+            <td className="units"><text className = 'texts'>选手：{this.state.board[5] || ''}</text></td>
           </tr>
         </table>
 
+        <Button className='button' onPress={() => this.createWb()}><text style = {{fontSize: 12}}>创建记分板</text></Button>
+        {/* <Button className='button' onPress={() => this.removeWb()}>删除记分板</Button> */}
+       
         <View className='section'>
-          <Button className='button' onPress={() => this.createWb()}>创建记分板</Button>
-        </View>
-          <Text className='label'>俱乐部一名称</Text>
-          <View className='section'>
+          <View className = 'group'>
+            <Text className='label'>俱乐部一名称</Text>
             <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubNameOne} onChange={v => this.setState({ clubNameOne: v })} />
-            <Button className='button' onPress={() => this.sendClubNameOne()}><text style = {{fontSize: 12}}>发送数据</text></Button>
           </View>
-          <Text className='label'>俱乐部二名称</Text>
-          <View className='section'>
-            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubNameTwo} onChange={r => this.setState({ clubNameTwo: r })} />
-            <Button className='button' onPress={() => this.sendClubNameTwo()}><text style = {{fontSize: 12}}>发送数据</text></Button>
+          <View className = 'group'>
+            <Text className='label'>俱乐部二名称</Text>
+            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubNameTwo} onChange={v => this.setState({ clubNameTwo: v })} />
           </View>
-         
+          <View className = 'group'>
+            <Text className='label'>俱乐部一分数</Text>
+            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubMarkOne} onChange={r => this.setState({ clubMarkOne: r })} />
+          </View>
+          <View className = 'group'>
+            <Text className='label'>俱乐部二分数</Text>
+            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubMarkTwo} onChange={r => this.setState({ clubMarkTwo: r })} />
+          </View>
+          <View className = 'group'>
+            <Text className='label'>选手一名称</Text>
+            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.playerNameOne} onChange={r => this.setState({ playerNameOne: r })} />
+          </View>
+          <View className = 'group'>  
+            <Text className='label'>选手二名称</Text>
+            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.playerNameTwo} onChange={r => this.setState({ playerNameTwo: r })} />
+          </View>
+          <View className = 'group'>  
+            <Text className='label'>选手一分数</Text>
+            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.playerMarkOne} onChange={r => this.setState({ playerMarkOne: r })} />
+          </View>
+          <View className = 'group'>  
+            <Text className='label'>选手二分数</Text>
+            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.playerMarkTwo} onChange={r => this.setState({ playerMarkTwo: r })} />
+          </View>
+         </View>
 
+         
+          <Button className='button' onPress={() => this.sendData()}><text style = {{fontSize: 12}}>发送数据</text></Button>
       </View>
     )
   }  
