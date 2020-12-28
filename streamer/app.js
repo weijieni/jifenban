@@ -10,7 +10,7 @@ class App extends Component {
 
   constructor () {
     super()
-    
+
     this.state = {
       wb: false, // 代码是否处于独立白板模式
       wbData: '', // 发送到独立白板的数据，驱动独立白板进行视图更新
@@ -24,6 +24,26 @@ class App extends Component {
       playerNameTwo: '',
       playerMarkOne: '',
       playerMarkTwo: '',
+      firSilverOne: '',
+      secSilverOne: '',
+      thdSliverOne: '',
+      fthSliverOne: '',
+      goldOne: '',
+      firSilverTwo: '',
+      secSilverTwo: '',
+      thdSliverTwo: '',
+      fthSliverTwo: '',
+      goldTwo: '',
+      selectedBtn1: null,
+      selectedBtn2: null,
+      selectedBtn3: null,
+      selectedBtn4: null,
+      selectedBtn5: null,
+      selectedBtn6: null,
+      selectedBtn7: null,
+      selectedBtn8: null,
+      selectedBtn9: null,
+      selectedBtnx: null,
       board:[]
     }
 
@@ -36,7 +56,8 @@ class App extends Component {
         this.state.playerNameOne, 
         this.state.playerNameTwo,
         this.state.playerMarkOne, 
-        this.state.playerMarkTwo
+        this.state.playerMarkTwo,
+        this.state.firSilverOne
       ]
     })
 
@@ -98,6 +119,57 @@ class App extends Component {
       console.log("发送到独立白板成功");
     }
   }  
+
+  buttonSelected1 = selectedBtn1 => ev =>{
+    this.setState({ selectedBtn1 })
+  }
+
+  buttonSelected2 = selectedBtn2 => ev =>{
+    this.setState({ selectedBtn2 })
+  }
+
+  buttonSelected3 = selectedBtn3 => ev =>{
+    this.setState({ selectedBtn3 })
+  }
+
+  buttonSelected4 = selectedBtn4 => ev =>{
+    this.setState({ selectedBtn4 })
+  }
+
+  buttonSelected5 = selectedBtn5 => ev =>{
+    this.setState({ selectedBtn5 })
+  }
+
+  buttonSelected6 = selectedBtn6 => ev =>{
+    this.setState({ selectedBtn6 })
+  }
+
+  buttonSelected7 = selectedBtn7 => ev =>{
+    this.setState({ selectedBtn7 })
+  }
+
+  buttonSelected8 = selectedBtn8 => ev =>{
+    this.setState({ selectedBtn8 })
+  }
+
+  buttonSelected9 = selectedBtn9 => ev =>{
+    this.setState({ selectedBtn9 })
+  }
+
+  buttonSelectedx = selectedBtnx => ev =>{
+    this.setState({ selectedBtnx })
+  }
+  handleScore(e) {
+    const obj = e.target
+
+    console.log(obj.id)
+    console.log(obj.className)
+    // if (btn.className.indexOf('btnActive')) {
+    //   btn.className = 'scButton'
+    // } else {
+    //   btn.className = 'btnActive'
+    // }
+  }
 
   createWb () {
     let width = Number(this.state.width) || 1100
@@ -186,34 +258,120 @@ class App extends Component {
             <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubNameOne} onChange={v => this.setState({ clubNameOne: v })} />
           </View>
           <View className = 'group'>
-            <Text className='label'>俱乐部二名称</Text>
-            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubNameTwo} onChange={v => this.setState({ clubNameTwo: v })} />
+            <Text className = 'label'>俱乐部二名称</Text>
+            <Input className = 'input' blurOnSubmit={false} placeholder='输入' value={this.state.clubNameTwo} onChange={v => this.setState({ clubNameTwo: v })} />
           </View>
           <View className = 'group'>
-            <Text className='label'>俱乐部一分数</Text>
-            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubMarkOne} onChange={r => this.setState({ clubMarkOne: r })} />
+            <Text className = 'label'>俱乐部一分数</Text>
+            <Input className = 'input' blurOnSubmit={false} placeholder='输入' value={this.state.clubMarkOne} onChange={r => this.setState({ clubMarkOne: r })} />
           </View>
           <View className = 'group'>
-            <Text className='label'>俱乐部二分数</Text>
-            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.clubMarkTwo} onChange={r => this.setState({ clubMarkTwo: r })} />
+            <Text className = 'label'>俱乐部二分数</Text>
+            <Input className = 'input' blurOnSubmit={false} placeholder='输入' value={this.state.clubMarkTwo} onChange={r => this.setState({ clubMarkTwo: r })} />
           </View>
           <View className = 'group'>
-            <Text className='label'>选手一名称</Text>
-            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.playerNameOne} onChange={r => this.setState({ playerNameOne: r })} />
+            <Text className = 'label'>选手一名称</Text>
+            <Input className = 'input' blurOnSubmit={false} placeholder='输入' value={this.state.playerNameOne} onChange={r => this.setState({ playerNameOne: r })} />
           </View>
           <View className = 'group'>  
-            <Text className='label'>选手二名称</Text>
-            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.playerNameTwo} onChange={r => this.setState({ playerNameTwo: r })} />
+            <Text className = 'label'>选手二名称</Text>
+            <Input className = 'input' blurOnSubmit={false} placeholder='输入' value={this.state.playerNameTwo} onChange={r => this.setState({ playerNameTwo: r })} />
           </View>
           <View className = 'group'>  
-            <Text className='label'>选手一分数</Text>
-            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.playerMarkOne} onChange={r => this.setState({ playerMarkOne: r })} />
+            <Text className = 'label'>选手一分数</Text>
+            <Input className = 'input' blurOnSubmit={false} placeholder='输入' value={this.state.playerMarkOne} onChange={r => this.setState({ playerMarkOne: r })} />
           </View>
           <View className = 'group'>  
-            <Text className='label'>选手二分数</Text>
-            <Input className='input' blurOnSubmit={false} placeholder='输入' value={this.state.playerMarkTwo} onChange={r => this.setState({ playerMarkTwo: r })} />
+            <Text className = 'label'>选手二分数</Text>
+            <Input className = 'input' blurOnSubmit={false} placeholder='输入' value={this.state.playerMarkTwo} onChange={r => this.setState({ playerMarkTwo: r })} />
           </View>
-         </View>
+          </View>
+          <Text className = 'scoreLabel'>选手一进球</Text>
+          <View className = 'scoreGroup'>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>银球一</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn1 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected1(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>银球二</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn2 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected2(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>银球三</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn3 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected3(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>银球四</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn4 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected4(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>金球</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn5 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected5(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+          </View>
+          <Text className = 'scoreLabel'>选手二进球</Text>
+          <View className = 'scoreGroup'>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>银球一</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn6 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected6(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>银球二</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn7 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected7(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>银球三</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn8 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected8(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>银球四</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtn9 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected9(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+            <View className = 'switch'>
+              <Text className = 'scoreLabel'>金球</Text>
+              {
+                ['进', '空'].map(key =>
+                  <Button className = {key === this.state.selectedBtnx ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelectedx(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
+                  )
+              }
+            </View>
+          </View>
 
          
           <Button className='button' onPress={() => this.sendData()}><text style = {{fontSize: 12}}>发送数据</text></Button>

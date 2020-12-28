@@ -16,9 +16,25 @@
     margin: 15px 0px 0px 15px;
 }
 
+.scoreLabel {
+    width: 100%;
+    height: 40px;
+    font-size: 30px;
+    color: white;
+    display: inline;
+    margin: 15px 0px 0px 15px;
+}
+
 .section {
-    height:24%;
+    height:14%;
     width:100%;
+    margin: 15px;
+    display: inline-block;
+}
+
+.scoreGroup {
+    height: 5%;
+    width: 100%;
     margin: 15px;
     display: inline-block;
 }
@@ -29,6 +45,17 @@
     display: flex;
     float: left;
     margin-left: 15px;
+    position: relative;
+}
+
+
+
+.switch {
+    width: 200px;
+    height: 75px;
+    margin-left: 10px;
+    display: flex;
+    float: left;
     position: relative;
 }
 
@@ -46,6 +73,28 @@
     width: 300px;
     background-color: rgb(253, 69, 69);
     border-radius: 50px;
+    display: flex;
+    margin: 50px 0;
+    text-alignment: center;
+    padding: 0;
+}
+
+.scButton {
+    height: 60px;
+    width: 130px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    margin: 30px 0;
+    text-alignment: center;
+    padding: 0;
+}
+
+.btnSelected {
+    height: 60px;
+    width: 130px;
+    background-color: #00ff00;
+    border-radius: 10px;
     display: flex;
     margin: 30px 0;
     text-alignment: center;
