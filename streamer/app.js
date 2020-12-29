@@ -34,32 +34,48 @@ class App extends Component {
       thdSliverTwo: '',
       fthSliverTwo: '',
       goldTwo: '',
-      selectedBtn1: null,
-      selectedBtn2: null,
-      selectedBtn3: null,
-      selectedBtn4: null,
-      selectedBtn5: null,
-      selectedBtn6: null,
-      selectedBtn7: null,
-      selectedBtn8: null,
-      selectedBtn9: null,
-      selectedBtnx: null,
-      board:[]
+      selectedBtn1: '未打',
+      selectedBtn2: '未打',
+      selectedBtn3: '未打',
+      selectedBtn4: '未打',
+      selectedBtn5: '未打',
+      selectedBtn6: '未打',
+      selectedBtn7: '未打',
+      selectedBtn8: '未打',
+      selectedBtn9: '未打',
+      selectedBtnx: '未打',
+      board:[
+        '', //俱乐部一名称
+        '', //俱乐部二名称
+        '', //俱乐部一得分
+        '', //俱乐部二得分
+        '', //选手一名称
+        '', //选手二名称
+        '', //选手一得分
+        '', //选手二得分
+        '', //选手一 银球一
+        '', //选手一 银球二
+        '', //选手一 银球三
+        '', //选手一 银球四
+        '', //选手一 金球
+        '', //选手二 金球
+        '', //选手二 银球四
+        '', //选手二 银球三
+        '', //选手二 银球二
+        '', //选手二 银球一
+        '未打', // 选手一 银球一 选择情况
+        '未打', // 选手一 银球二 选择情况
+        '未打', // 选手一 银球三 选择情况
+        '未打', // 选手一 银球四 选择情况
+        '未打', // 选手一 金球 选择情况
+        '未打', // 选手二 金球 选择情况
+        '未打', // 选手二 银球四 选择情况
+        '未打', // 选手二 银球三 选择情况
+        '未打', // 选手二 银球二 选择情况
+        '未打', // 选手二 银球一 选择情况
+      ]
     }
 
-    this.setState({
-      board: [
-        this.state.clubNameOne, 
-        this.state.clubNameTwo, 
-        this.state.clubMarkOne,  
-        this.state.clubMarkTwo, 
-        this.state.playerNameOne, 
-        this.state.playerNameTwo,
-        this.state.playerMarkOne, 
-        this.state.playerMarkTwo,
-        this.state.firSilverOne
-      ]
-    })
 
     // 调用sdk获取初始化参数的api，判断是否处于独立白板模式
     if (typeof hyExt.env.getInitialParam === 'function') {
@@ -92,20 +108,155 @@ class App extends Component {
   }
 
   sendData () {
+  
+    this.handleScore1()
+
+    let { 
+      wbId, 
+      board,
+      clubNameOne,
+      clubNameTwo,
+      clubMarkOne,
+      clubMarkTwo,
+      playerNameOne,
+      playerNameTwo,
+      playerMarkOne,
+      playerMarkTwo,
+      firSilverOne,
+      secSilverOne,
+      thdSliverOne,
+      fthSliverOne,
+      goldOne,
+      firSilverTwo,
+      secSilverTwo,
+      thdSliverTwo,
+      fthSliverTwo,
+      goldTwo,
+      selectedBtn1,
+      selectedBtn2,
+      selectedBtn3,
+      selectedBtn4,
+      selectedBtn5,
+      selectedBtn6,
+      selectedBtn7,
+      selectedBtn8,
+      selectedBtn9,
+      selectedBtnx
+    } = this.state
+
+    let item1 = {...board[0]}
+    item1 = clubNameOne
+    board[0] = item1
     
-    let { wbId, board } = this.state
-    this.setState({
-      board: [
-        this.state.clubNameOne, 
-        this.state.clubNameTwo, 
-        this.state.clubMarkOne,  
-        this.state.clubMarkTwo,
-        this.state.playerNameOne, 
-        this.state.playerNameTwo,
-        this.state.playerMarkOne, 
-        this.state.playerMarkTwo
-      ]
-    })
+    let item2 = {...board[1]}
+    item2 = clubNameTwo
+    board[1] = item2
+    
+    let item3 = {...board[2]}
+    item3 = clubMarkOne
+    board[2] = item3
+    
+    let item4 = {...board[3]}
+    item4 = clubMarkTwo
+    board[3] = item4
+    
+    let item5 = {...board[4]}
+    item5 = playerNameOne
+    board[4] = item5
+    
+    let item6 = {...board[5]}
+    item6 = playerNameTwo
+    board[5] = item6
+    
+    let item7 = {...board[6]}
+    item7 = playerMarkOne
+    board[6] = item7
+    
+    let item8 = {...board[7]}
+    item8 = playerMarkTwo
+    board[7] = item8
+    
+    let item9 = {...board[8]}
+    item9 = firSilverOne
+    board[8] = item9
+    
+    let item10 = {...board[9]}
+    item10 = secSilverOne
+    board[9] = item10
+    
+    let item11 = {...board[10]}
+    item11 = thdSliverOne
+    board[10] = item11
+    
+    let item12 = {...board[11]}
+    item12 = fthSliverOne
+    board[11] = item12
+    
+    let item13 = {...board[12]}
+    item13 = goldOne
+    board[12] = item13
+    
+    let item14 = {...board[13]}
+    item14 = goldTwo
+    board[13] = item14
+    
+    let item15 = {...board[14]}
+    item15 = fthSliverTwo
+    board[14] = item15
+    
+    let item16 = {...board[15]}
+    item16 = thdSliverTwo
+    board[15] = item16
+    
+    let item17 = {...board[16]}
+    item17 = secSilverTwo
+    board[16] = item17
+    
+    let item18 = {...board[17]}
+    item18 = firSilverTwo
+    board[17] = item18
+    
+    let item19 = {...board[18]}
+    item19 = selectedBtn1
+    board[18] = item19
+    
+    let item20 = {...board[19]}
+    item20 = selectedBtn2
+    board[19] = item20
+    
+    let item21 = {...board[20]}
+    item21 = selectedBtn3
+    board[20] = item21
+    
+    let item22 = {...board[21]}
+    item22 = selectedBtn4
+    board[21] = item22
+    
+    let item23 = {...board[22]}
+    item23 = selectedBtn5
+    board[22] = item23
+    
+    let item24 = {...board[23]}
+    item24 = selectedBtn6
+    board[23] = item24
+    
+    let item25 = {...board[24]}
+    item25 = selectedBtn7
+    board[24] = item25
+    
+    let item26 = {...board[25]}
+    item26 = selectedBtn8
+    board[25] = item26
+    
+    let item27 = {...board[26]}
+    item27 = selectedBtn9
+    board[26] = item27
+    
+    let item28 = {...board[27]}
+    item28 = selectedBtnx
+    board[27] = item28
+    
+    this.setState({board})
     this.emitMessage(board)
     // 发送数据到独立白板
     if(this.state.wbId){
@@ -120,56 +271,331 @@ class App extends Component {
     }
   }  
 
+  reset () {
+    
+    this.setState({
+      clubNameOne: '',
+      clubNameTwo: '',
+      clubMarkOne: '',
+      clubMarkTwo: '',
+      playerNameOne: '',
+      playerNameTwo: '',
+      playerMarkOne: '',
+      playerMarkTwo: '',
+      firSilverOne: '',
+      secSilverOne: '',
+      thdSliverOne: '',
+      fthSliverOne: '',
+      goldOne: '',
+      firSilverTwo: '',
+      secSilverTwo: '',
+      thdSliverTwo: '',
+      fthSliverTwo: '',
+      goldTwo: '',
+      selectedBtn1: '未打',
+      selectedBtn2: '未打',
+      selectedBtn3: '未打',
+      selectedBtn4: '未打',
+      selectedBtn5: '未打',
+      selectedBtn6: '未打',
+      selectedBtn7: '未打',
+      selectedBtn8: '未打',
+      selectedBtn9: '未打',
+      selectedBtnx: '未打',
+      board:[
+        '', //俱乐部一名称
+        '', //俱乐部二名称
+        '', //俱乐部一得分
+        '', //俱乐部二得分
+        '', //选手一名称
+        '', //选手二名称
+        '', //选手一得分
+        '', //选手二得分
+        '', //选手一 银球一
+        '', //选手一 银球二
+        '', //选手一 银球三
+        '', //选手一 银球四
+        '', //选手一 金球
+        '', //选手二 金球
+        '', //选手二 银球四
+        '', //选手二 银球三
+        '', //选手二 银球二
+        '', //选手二 银球一
+        '未打', // 选手一 银球一 选择情况
+        '未打', // 选手一 银球二 选择情况
+        '未打', // 选手一 银球三 选择情况
+        '未打', // 选手一 银球四 选择情况
+        '未打', // 选手一 金球 选择情况
+        '未打', // 选手二 金球 选择情况
+        '未打', // 选手二 银球四 选择情况
+        '未打', // 选手二 银球三 选择情况
+        '未打', // 选手二 银球二 选择情况
+        '未打', // 选手二 银球一 选择情况
+      ]
+    })
+
+    console.log(this.state)
+
+    let { wbId, board } = this.state
+
+    this.emitMessage(board)
+    // 发送数据到独立白板
+    if(this.state.wbId){
+      hyExt.stream.sendToExtraWhiteBoard({
+        wbId,
+        data: JSON.stringify(board),
+        // data: board
+      }).catch(
+        (err)=>{console.log(err)}
+      )
+      console.log("重置白板数据白板成功");
+    }
+  }  
+
+  handleScore1() {
+
+    
+    //这里逻辑出了点问题，if‘进’ 会显示原本应该在if‘未打’的结果，‘空’会显示‘进’，‘未打’会显示空
+    //所以我调整了一下if的条件，但是不符合常识。。
+    if (this.state.selectedBtn1 == '进') {
+      this.setState({firSilverOne: '✔'})
+    } else if (this.state.selectedBtn1 == '空') {
+      this.setState({firSilverOne: '✘'})
+    } else {
+      this.setState({firSilverOne: ''})
+    }
+    
+    // let {board, firSilverOne} = this.state
+    // console.log(firSilverOne)
+    // let temps = [...board]
+    // let temp = {...board[8]}
+    // temp = firSilverOne
+    // board[8] = temp
+    // console.log(temps)
+    // this.setState({board: temps})
+    // console.log(board)
+
+  }
+  
   buttonSelected1 = selectedBtn1 => ev =>{
     this.setState({ selectedBtn1 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[18]}
+    btn1 = selectedBtn1
+    board[18] = btn1
+    this.setState({board})
+
+    // this.handleScore1()
+    
+    if (this.state.selectedBtn1 == '进') {
+      this.setState({firSilverOne: '✔'})
+    } else if (this.state.selectedBtn1 == '空') {
+      this.setState({firSilverOne: '✘'})
+    } else {
+      this.setState({firSilverOne: ''})
+    }
+
   }
 
   buttonSelected2 = selectedBtn2 => ev =>{
     this.setState({ selectedBtn2 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[19]}
+    btn1 = selectedBtn2
+    board[19] = btn1
+    this.setState({board})
+
+    this.handleScore2()
+  }
+
+  handleScore2() {
+    if (this.state.selectedBtn2 == '未打') {
+      this.setState({secSilverOne: '✔'})
+    } else if (this.state.selectedBtn2 == '进') {
+      this.setState({secSilverOne: '✘'})
+    } else {
+      this.setState({secSilverOne: ''})
+    }
   }
 
   buttonSelected3 = selectedBtn3 => ev =>{
     this.setState({ selectedBtn3 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[20]}
+    btn1 = selectedBtn3
+    board[20] = btn1
+    this.setState({board})
+
+    this.handleScore3()
+  }
+
+  handleScore3() {
+    if (this.state.selectedBtn3 == '未打') {
+      this.setState({thdSliverOne: '✔'})
+    } else if (this.state.selectedBtn3 == '进') {
+      this.setState({thdSliverOne: '✘'})
+    } else {
+      this.setState({thdSliverOne: ''})
+    }
   }
 
   buttonSelected4 = selectedBtn4 => ev =>{
     this.setState({ selectedBtn4 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[21]}
+    btn1 = selectedBtn4
+    board[21] = btn1
+    this.setState({board})
+
+    this.handleScore4()
+  }
+
+  handleScore4() {
+    if (this.state.selectedBtn4 == '未打') {
+      this.setState({fthSliverOne: '✔'})
+    } else if (this.state.selectedBtn4 == '进') {
+      this.setState({fthSliverOne: '✘'})
+    } else {
+      this.setState({fthSliverOne: ''})
+    }
   }
 
   buttonSelected5 = selectedBtn5 => ev =>{
     this.setState({ selectedBtn5 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[22]}
+    btn1 = selectedBtn5
+    board[22] = btn1
+    this.setState({board})
+
+    this.handleScore5()
+  }
+
+  handleScore5() {
+    if (this.state.selectedBtn5 == '未打') {
+      this.setState({goldOne: '✔'})
+    } else if (this.state.selectedBtn5 == '进') {
+      this.setState({goldOne: '✘'})
+    } else {
+      this.setState({goldOne: ''})
+    }
   }
 
   buttonSelected6 = selectedBtn6 => ev =>{
     this.setState({ selectedBtn6 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[23]}
+    btn1 = selectedBtn6
+    board[23] = btn1
+    this.setState({board})
+
+    this.handleScore6()
+  }
+
+  handleScore6() {
+    if (this.state.selectedBtn6 == '未打') {
+      this.setState({goldTwo: '✔'})
+    } else if (this.state.selectedBtn6 == '进') {
+      this.setState({goldTwo: '✘'})
+    } else {
+      this.setState({goldTwo: ''})
+    }
   }
 
   buttonSelected7 = selectedBtn7 => ev =>{
     this.setState({ selectedBtn7 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[24]}
+    btn1 = selectedBtn7
+    board[24] = btn1
+    this.setState({board})
+
+    this.handleScore7()
+  }
+
+  handleScore7() {
+    if (this.state.selectedBtn7 == '未打') {
+      this.setState({fthSliverTwo: '✔'})
+    } else if (this.state.selectedBtn7 == '进') {
+      this.setState({fthSliverTwo: '✘'})
+    } else {
+      this.setState({fthSliverTwo: ''})
+    }
   }
 
   buttonSelected8 = selectedBtn8 => ev =>{
     this.setState({ selectedBtn8 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[25]}
+    btn1 = selectedBtn8
+    board[25] = btn1
+    this.setState({board})
+
+    this.handleScore8()
+  }
+
+  handleScore8() {
+    if (this.state.selectedBtn8 == '未打') {
+      this.setState({thdSliverTwo: '✔'})
+    } else if (this.state.selectedBtn8 == '进') {
+      this.setState({thdSliverTwo: '✘'})
+    } else {
+      this.setState({thdSliverTwo: ''})
+    }
   }
 
   buttonSelected9 = selectedBtn9 => ev =>{
     this.setState({ selectedBtn9 })
+
+    let board = [...this.state.board]
+    let btn1 = {...board[26]}
+    btn1 = selectedBtn9
+    board[26] = btn1
+    this.setState({board})
+
+    this.handleScore9()
+  }
+
+  handleScore9() {
+    if (this.state.selectedBtn9 == '未打') {
+      this.setState({secSilverTwo: '✔'})
+    } else if (this.state.selectedBtn9 == '进') {
+      this.setState({secSilverTwo: '✘'})
+    } else {
+      this.setState({secSilverTwo: ''})
+    }
   }
 
   buttonSelectedx = selectedBtnx => ev =>{
     this.setState({ selectedBtnx })
-  }
-  handleScore(e) {
-    const obj = e.target
 
-    console.log(obj.id)
-    console.log(obj.className)
-    // if (btn.className.indexOf('btnActive')) {
-    //   btn.className = 'scButton'
-    // } else {
-    //   btn.className = 'btnActive'
-    // }
+    let board = [...this.state.board]
+    let btn1 = {...board[27]}
+    btn1 = selectedBtnx
+    board[27] = btn1
+    this.setState({board})
+
+    this.handleScorex()
   }
+
+  handleScorex() {
+    if (this.state.selectedBtnx == '未打') {
+      this.setState({firSilverTwo: '✔'})
+    } else if (this.state.selectedBtnx == '进') {
+      this.setState({firSilverTwo: '✘'})
+    } else {
+      this.setState({firSilverTwo: ''})
+    }
+  }
+
 
   createWb () {
     let width = Number(this.state.width) || 1100
@@ -235,16 +661,16 @@ class App extends Component {
           </tr>
           <tr className = 'row'>
             <td className="units"><text className = 'texts'>选手：{this.state.board[4] || ''}</text></td>
-            <td className="units"></td>
-            <td className="units"></td>
-            <td className="units"></td>
-            <td className="units"></td>
-            <td className="units"></td>
-            <td className="units"></td>
-            <td className="units"></td>
-            <td className="units"></td>
-            <td className="units"></td>
-            <td className="units"></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[8] || ''} </text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[9] || ''} </text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[10] || ''}</text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[11] || ''}</text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[12] || ''}</text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[13] || ''}</text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[14] || ''}</text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[15] || ''}</text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[16] || ''}</text></td>
+            <td className="units"><text className = 'scoreTexts'>{this.state.board[17] || ''}</text></td>
             <td className="units"><text className = 'texts'>选手：{this.state.board[5] || ''}</text></td>
           </tr>
         </table>
@@ -291,7 +717,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>银球一</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn1 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected1(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -299,7 +725,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>银球二</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn2 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected2(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -307,7 +733,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>银球三</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn3 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected3(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -315,7 +741,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>银球四</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn4 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected4(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -323,7 +749,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>金球</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn5 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected5(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -334,7 +760,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>银球一</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn6 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected6(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -342,7 +768,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>银球二</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn7 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected7(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -350,7 +776,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>银球三</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn8 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected8(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -358,7 +784,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>银球四</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtn9 ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelected9(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -366,7 +792,7 @@ class App extends Component {
             <View className = 'switch'>
               <Text className = 'scoreLabel'>金球</Text>
               {
-                ['进', '空'].map(key =>
+                ['进', '空', '未打'].map(key =>
                   <Button className = {key === this.state.selectedBtnx ? 'btnSelected' : 'scButton'} key = {key} onPress = {this.buttonSelectedx(key)}><text style = {{fontSize: 12}}>{key}</text></Button>
                   )
               }
@@ -374,7 +800,8 @@ class App extends Component {
           </View>
 
          
-          <Button className='button' onPress={() => this.sendData()}><text style = {{fontSize: 12}}>发送数据</text></Button>
+          <Button className='button' onPress={() => this.sendData()}><text style = {{fontSize: 12}}>更新记分板</text></Button>
+          <Button className='button' onPress={() => this.reset()}><text style = {{fontSize: 12}}>重置记分板</text></Button>
       </View>
     )
   }  
