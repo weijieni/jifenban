@@ -29,11 +29,11 @@ class App extends Component {
       thdSliverOne: '',
       fthSliverOne: '',
       goldOne: '',
-      firSilverTwo: '',
-      secSilverTwo: '',
-      thdSliverTwo: '',
-      fthSliverTwo: '',
       goldTwo: '',
+      fthSliverTwo: '',
+      thdSliverTwo: '',
+      secSilverTwo: '',
+      firSilverTwo: '',
       selectedBtn1: '未打',
       selectedBtn2: '未打',
       selectedBtn3: '未打',
@@ -68,11 +68,11 @@ class App extends Component {
         '未打', // 选手一 银球三 选择情况
         '未打', // 选手一 银球四 选择情况
         '未打', // 选手一 金球 选择情况
-        '未打', // 选手二 金球 选择情况
-        '未打', // 选手二 银球四 选择情况
-        '未打', // 选手二 银球三 选择情况
-        '未打', // 选手二 银球二 选择情况
         '未打', // 选手二 银球一 选择情况
+        '未打', // 选手二 银球二 选择情况
+        '未打', // 选手二 银球三 选择情况
+        '未打', // 选手二 银球四 选择情况
+        '未打', // 选手二 金球 选择情况
       ]
     }
 
@@ -110,6 +110,15 @@ class App extends Component {
   sendData () {
   
     this.handleScore1()
+    this.handleScore2()
+    this.handleScore3()
+    this.handleScore4()
+    this.handleScore5()
+    this.handleScore6()
+    this.handleScore7()
+    this.handleScore8()
+    this.handleScore9()
+    this.handleScorex()
 
     let { 
       wbId, 
@@ -236,25 +245,25 @@ class App extends Component {
     item23 = selectedBtn5
     board[22] = item23
     
-    let item24 = {...board[23]}
+    let item24 = {...board[27]}
     item24 = selectedBtn6
-    board[23] = item24
+    board[27] = item24
     
-    let item25 = {...board[24]}
+    let item25 = {...board[26]}
     item25 = selectedBtn7
-    board[24] = item25
+    board[26] = item25
     
     let item26 = {...board[25]}
     item26 = selectedBtn8
     board[25] = item26
     
-    let item27 = {...board[26]}
+    let item27 = {...board[24]}
     item27 = selectedBtn9
-    board[26] = item27
+    board[24] = item27
     
-    let item28 = {...board[27]}
+    let item28 = {...board[23]}
     item28 = selectedBtnx
-    board[27] = item28
+    board[23] = item28
     
     this.setState({board})
     this.emitMessage(board)
@@ -271,8 +280,143 @@ class App extends Component {
     }
   }  
 
-  reset () {
+  resetScore () {
+    let { 
+      wbId, 
+      board,
+    } = this.state
     
+    let item9 = {...board[8]}
+    item9 = ''
+    board[8] = item9
+    
+    let item10 = {...board[9]}
+    item10 = ''
+    board[9] = item10
+    
+    let item11 = {...board[10]}
+    item11 = ''
+    board[10] = item11
+    
+    let item12 = {...board[11]}
+    item12 = ''
+    board[11] = item12
+    
+    let item13 = {...board[12]}
+    item13 = ''
+    board[12] = item13
+    
+    let item14 = {...board[13]}
+    item14 = ''
+    board[13] = item14
+    
+    let item15 = {...board[14]}
+    item15 = ''
+    board[14] = item15
+    
+    let item16 = {...board[15]}
+    item16 = ''
+    board[15] = item16
+    
+    let item17 = {...board[16]}
+    item17 = ''
+    board[16] = item17
+    
+    let item18 = {...board[17]}
+    item18 = ''
+    board[17] = item18
+    
+    let item19 = {...board[18]}
+    item19 = '未打'
+    board[18] = item19
+    
+    let item20 = {...board[19]}
+    item20 = '未打'
+    board[19] = item20
+    
+    let item21 = {...board[20]}
+    item21 = '未打'
+    board[20] = item21
+    
+    let item22 = {...board[21]}
+    item22 = '未打'
+    board[21] = item22
+    
+    let item23 = {...board[22]}
+    item23 = '未打'
+    board[22] = item23
+    
+    let item24 = {...board[27]}
+    item24 = '未打'
+    board[27] = item24
+    
+    let item25 = {...board[26]}
+    item25 = '未打'
+    board[26] = item25
+    
+    let item26 = {...board[25]}
+    item26 = '未打'
+    board[25] = item26
+    
+    let item27 = {...board[24]}
+    item27 = '未打'
+    board[24] = item27
+    
+    let item28 = {...board[23]}
+    item28 = '未打'
+    board[23] = item28
+    
+    this.setState({board})
+    this.setState({
+      clubNameOne: '',
+      clubNameTwo: '',
+      clubMarkOne: '',
+      clubMarkTwo: '',
+      playerNameOne: '',
+      playerNameTwo: '',
+      playerMarkOne: '',
+      playerMarkTwo: '',
+      firSilverOne: '',
+      secSilverOne: '',
+      thdSliverOne: '',
+      fthSliverOne: '',
+      goldOne: '',
+      goldTwo: '',
+      fthSliverTwo: '',
+      thdSliverTwo: '',
+      secSilverTwo: '',
+      firSilverTwo: '',
+      selectedBtn1: '未打',
+      selectedBtn2: '未打',
+      selectedBtn3: '未打',
+      selectedBtn4: '未打',
+      selectedBtn5: '未打',
+      selectedBtn6: '未打',
+      selectedBtn7: '未打',
+      selectedBtn8: '未打',
+      selectedBtn9: '未打',
+      selectedBtnx: '未打'
+    })
+
+    console.log(this.state)
+
+    this.emitMessage(board)
+    // 发送数据到独立白板
+    if(this.state.wbId){
+      hyExt.stream.sendToExtraWhiteBoard({
+        wbId,
+        data: JSON.stringify(board),
+        // data: board
+      }).catch(
+        (err)=>{console.log(err)}
+      )
+      console.log("重置白板数据白板成功");
+    }
+  }  
+
+  resetAll () {
+    let { wbId, board } = this.state
+
     this.setState({
       clubNameOne: '',
       clubNameTwo: '',
@@ -326,17 +470,15 @@ class App extends Component {
         '未打', // 选手一 银球三 选择情况
         '未打', // 选手一 银球四 选择情况
         '未打', // 选手一 金球 选择情况
-        '未打', // 选手二 金球 选择情况
-        '未打', // 选手二 银球四 选择情况
-        '未打', // 选手二 银球三 选择情况
-        '未打', // 选手二 银球二 选择情况
         '未打', // 选手二 银球一 选择情况
+        '未打', // 选手二 银球二 选择情况
+        '未打', // 选手二 银球三 选择情况
+        '未打', // 选手二 银球四 选择情况
+        '未打', // 选手二 金球 选择情况
       ]
     })
 
     console.log(this.state)
-
-    let { wbId, board } = this.state
 
     this.emitMessage(board)
     // 发送数据到独立白板
@@ -352,11 +494,11 @@ class App extends Component {
     }
   }  
 
+  
+
   handleScore1() {
 
     
-    //这里逻辑出了点问题，if‘进’ 会显示原本应该在if‘未打’的结果，‘空’会显示‘进’，‘未打’会显示空
-    //所以我调整了一下if的条件，但是不符合常识。。
     if (this.state.selectedBtn1 == '进') {
       this.setState({firSilverOne: '✔'})
     } else if (this.state.selectedBtn1 == '空') {
@@ -407,13 +549,12 @@ class App extends Component {
     board[19] = btn1
     this.setState({board})
 
-    this.handleScore2()
   }
 
   handleScore2() {
-    if (this.state.selectedBtn2 == '未打') {
+    if (this.state.selectedBtn2 == '进') {
       this.setState({secSilverOne: '✔'})
-    } else if (this.state.selectedBtn2 == '进') {
+    } else if (this.state.selectedBtn2 == '空') {
       this.setState({secSilverOne: '✘'})
     } else {
       this.setState({secSilverOne: ''})
@@ -429,13 +570,12 @@ class App extends Component {
     board[20] = btn1
     this.setState({board})
 
-    this.handleScore3()
   }
 
   handleScore3() {
-    if (this.state.selectedBtn3 == '未打') {
+    if (this.state.selectedBtn3 == '进') {
       this.setState({thdSliverOne: '✔'})
-    } else if (this.state.selectedBtn3 == '进') {
+    } else if (this.state.selectedBtn3 == '空') {
       this.setState({thdSliverOne: '✘'})
     } else {
       this.setState({thdSliverOne: ''})
@@ -451,13 +591,12 @@ class App extends Component {
     board[21] = btn1
     this.setState({board})
 
-    this.handleScore4()
   }
 
   handleScore4() {
-    if (this.state.selectedBtn4 == '未打') {
+    if (this.state.selectedBtn4 == '进') {
       this.setState({fthSliverOne: '✔'})
-    } else if (this.state.selectedBtn4 == '进') {
+    } else if (this.state.selectedBtn4 == '空') {
       this.setState({fthSliverOne: '✘'})
     } else {
       this.setState({fthSliverOne: ''})
@@ -473,13 +612,12 @@ class App extends Component {
     board[22] = btn1
     this.setState({board})
 
-    this.handleScore5()
   }
 
   handleScore5() {
-    if (this.state.selectedBtn5 == '未打') {
+    if (this.state.selectedBtn5 == '进') {
       this.setState({goldOne: '✔'})
-    } else if (this.state.selectedBtn5 == '进') {
+    } else if (this.state.selectedBtn5 == '空') {
       this.setState({goldOne: '✘'})
     } else {
       this.setState({goldOne: ''})
@@ -490,21 +628,20 @@ class App extends Component {
     this.setState({ selectedBtn6 })
 
     let board = [...this.state.board]
-    let btn1 = {...board[23]}
+    let btn1 = {...board[27]}
     btn1 = selectedBtn6
-    board[23] = btn1
+    board[27] = btn1
     this.setState({board})
 
-    this.handleScore6()
   }
 
   handleScore6() {
-    if (this.state.selectedBtn6 == '未打') {
-      this.setState({goldTwo: '✔'})
-    } else if (this.state.selectedBtn6 == '进') {
-      this.setState({goldTwo: '✘'})
+    if (this.state.selectedBtn6 == '进') {
+      this.setState({firSilverTwo: '✔'})
+    } else if (this.state.selectedBtn6 == '空') {
+      this.setState({firSilverTwo: '✘'})
     } else {
-      this.setState({goldTwo: ''})
+      this.setState({firSilverTwo: ''})
     }
   }
 
@@ -512,21 +649,20 @@ class App extends Component {
     this.setState({ selectedBtn7 })
 
     let board = [...this.state.board]
-    let btn1 = {...board[24]}
+    let btn1 = {...board[26]}
     btn1 = selectedBtn7
-    board[24] = btn1
+    board[26] = btn1
     this.setState({board})
 
-    this.handleScore7()
   }
 
   handleScore7() {
-    if (this.state.selectedBtn7 == '未打') {
-      this.setState({fthSliverTwo: '✔'})
-    } else if (this.state.selectedBtn7 == '进') {
-      this.setState({fthSliverTwo: '✘'})
+    if (this.state.selectedBtn7 == '进') {
+      this.setState({secSilverTwo: '✔'})
+    } else if (this.state.selectedBtn7 == '空') {
+      this.setState({secSilverTwo: '✘'})
     } else {
-      this.setState({fthSliverTwo: ''})
+      this.setState({secSilverTwo: ''})
     }
   }
 
@@ -539,13 +675,12 @@ class App extends Component {
     board[25] = btn1
     this.setState({board})
 
-    this.handleScore8()
   }
 
   handleScore8() {
-    if (this.state.selectedBtn8 == '未打') {
+    if (this.state.selectedBtn8 == '进') {
       this.setState({thdSliverTwo: '✔'})
-    } else if (this.state.selectedBtn8 == '进') {
+    } else if (this.state.selectedBtn8 == '空') {
       this.setState({thdSliverTwo: '✘'})
     } else {
       this.setState({thdSliverTwo: ''})
@@ -556,21 +691,20 @@ class App extends Component {
     this.setState({ selectedBtn9 })
 
     let board = [...this.state.board]
-    let btn1 = {...board[26]}
+    let btn1 = {...board[24]}
     btn1 = selectedBtn9
-    board[26] = btn1
+    board[24] = btn1
     this.setState({board})
 
-    this.handleScore9()
   }
 
   handleScore9() {
-    if (this.state.selectedBtn9 == '未打') {
-      this.setState({secSilverTwo: '✔'})
-    } else if (this.state.selectedBtn9 == '进') {
-      this.setState({secSilverTwo: '✘'})
+    if (this.state.selectedBtn9 == '进') {
+      this.setState({fthSliverTwo: '✔'})
+    } else if (this.state.selectedBtn9 == '空') {
+      this.setState({fthSliverTwo: '✘'})
     } else {
-      this.setState({secSilverTwo: ''})
+      this.setState({fthSliverTwo: ''})
     }
   }
 
@@ -578,21 +712,20 @@ class App extends Component {
     this.setState({ selectedBtnx })
 
     let board = [...this.state.board]
-    let btn1 = {...board[27]}
+    let btn1 = {...board[23]}
     btn1 = selectedBtnx
-    board[27] = btn1
+    board[23] = btn1
     this.setState({board})
 
-    this.handleScorex()
   }
 
   handleScorex() {
-    if (this.state.selectedBtnx == '未打') {
-      this.setState({firSilverTwo: '✔'})
-    } else if (this.state.selectedBtnx == '进') {
-      this.setState({firSilverTwo: '✘'})
+    if (this.state.selectedBtnx == '进') {
+      this.setState({goldTwo: '✔'})
+    } else if (this.state.selectedBtnx == '空') {
+      this.setState({goldTwo: '✘'})
     } else {
-      this.setState({firSilverTwo: ''})
+      this.setState({goldTwo: ''})
     }
   }
 
@@ -801,7 +934,7 @@ class App extends Component {
 
          
           <Button className='button' onPress={() => this.sendData()}><text style = {{fontSize: 12}}>更新记分板</text></Button>
-          <Button className='button' onPress={() => this.reset()}><text style = {{fontSize: 12}}>重置记分板</text></Button>
+          <Button className='button' onPress={() => this.resetScore()}><text style = {{fontSize: 12}}>重置进球</text></Button>
       </View>
     )
   }  
