@@ -284,8 +284,48 @@ class App extends Component {
     let { 
       wbId, 
       board,
+      clubNameOne,
+      clubNameTwo,
+      clubMarkOne,
+      clubMarkTwo,
+      playerNameOne,
+      playerNameTwo,
+      playerMarkOne,
+      playerMarkTwo,
     } = this.state
     
+    let item1 = {...board[0]}
+    item1 = clubNameOne
+    board[0] = item1
+    
+    let item2 = {...board[1]}
+    item2 = clubNameTwo
+    board[1] = item2
+    
+    let item3 = {...board[2]}
+    item3 = clubMarkOne
+    board[2] = item3
+    
+    let item4 = {...board[3]}
+    item4 = clubMarkTwo
+    board[3] = item4
+    
+    let item5 = {...board[4]}
+    item5 = playerNameOne
+    board[4] = item5
+    
+    let item6 = {...board[5]}
+    item6 = playerNameTwo
+    board[5] = item6
+    
+    let item7 = {...board[6]}
+    item7 = playerMarkOne
+    board[6] = item7
+    
+    let item8 = {...board[7]}
+    item8 = playerMarkTwo
+    board[7] = item8
+
     let item9 = {...board[8]}
     item9 = ''
     board[8] = item9
@@ -368,24 +408,6 @@ class App extends Component {
     
     this.setState({board})
     this.setState({
-      clubNameOne: '',
-      clubNameTwo: '',
-      clubMarkOne: '',
-      clubMarkTwo: '',
-      playerNameOne: '',
-      playerNameTwo: '',
-      playerMarkOne: '',
-      playerMarkTwo: '',
-      firSilverOne: '',
-      secSilverOne: '',
-      thdSliverOne: '',
-      fthSliverOne: '',
-      goldOne: '',
-      goldTwo: '',
-      fthSliverTwo: '',
-      thdSliverTwo: '',
-      secSilverTwo: '',
-      firSilverTwo: '',
       selectedBtn1: '未打',
       selectedBtn2: '未打',
       selectedBtn3: '未打',
