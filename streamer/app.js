@@ -417,87 +417,17 @@ class App extends Component {
       selectedBtn7: '未打',
       selectedBtn8: '未打',
       selectedBtn9: '未打',
-      selectedBtnx: '未打'
-    })
-
-    console.log(this.state)
-
-    this.emitMessage(board)
-    // 发送数据到独立白板
-    if(this.state.wbId){
-      hyExt.stream.sendToExtraWhiteBoard({
-        wbId,
-        data: JSON.stringify(board),
-        // data: board
-      }).catch(
-        (err)=>{console.log(err)}
-      )
-      console.log("重置白板数据白板成功");
-    }
-  }  
-
-  resetAll () {
-    let { wbId, board } = this.state
-
-    this.setState({
-      clubNameOne: '',
-      clubNameTwo: '',
-      clubMarkOne: '',
-      clubMarkTwo: '',
-      playerNameOne: '',
-      playerNameTwo: '',
-      playerMarkOne: '',
-      playerMarkTwo: '',
-      firSilverOne: '',
-      secSilverOne: '',
-      thdSliverOne: '',
-      fthSliverOne: '',
-      goldOne: '',
-      firSilverTwo: '',
-      secSilverTwo: '',
-      thdSliverTwo: '',
-      fthSliverTwo: '',
-      goldTwo: '',
-      selectedBtn1: '未打',
-      selectedBtn2: '未打',
-      selectedBtn3: '未打',
-      selectedBtn4: '未打',
-      selectedBtn5: '未打',
-      selectedBtn6: '未打',
-      selectedBtn7: '未打',
-      selectedBtn8: '未打',
-      selectedBtn9: '未打',
       selectedBtnx: '未打',
-      board:[
-        '', //俱乐部一名称
-        '', //俱乐部二名称
-        '', //俱乐部一得分
-        '', //俱乐部二得分
-        '', //选手一名称
-        '', //选手二名称
-        '', //选手一得分
-        '', //选手二得分
-        '', //选手一 银球一
-        '', //选手一 银球二
-        '', //选手一 银球三
-        '', //选手一 银球四
-        '', //选手一 金球
-        '', //选手二 金球
-        '', //选手二 银球四
-        '', //选手二 银球三
-        '', //选手二 银球二
-        '', //选手二 银球一
-        '未打', // 选手一 银球一 选择情况
-        '未打', // 选手一 银球二 选择情况
-        '未打', // 选手一 银球三 选择情况
-        '未打', // 选手一 银球四 选择情况
-        '未打', // 选手一 金球 选择情况
-        '未打', // 选手二 银球一 选择情况
-        '未打', // 选手二 银球二 选择情况
-        '未打', // 选手二 银球三 选择情况
-        '未打', // 选手二 银球四 选择情况
-        '未打', // 选手二 金球 选择情况
-      ]
+      firSilverOne:'',
+      secSilverOne:'',
+      thdSliverOne:'',
+      fthSliverOne:'',
+      goldOne:'',
+      firSilverTwo:'',
+      secSilverTwo:'',
+      thdSliverTwo:'',
+      fthSliverTwo:'',
+      goldTwo:'',
     })
 
     console.log(this.state)
@@ -515,20 +445,104 @@ class App extends Component {
       console.log("重置白板数据白板成功");
     }
   }  
+
+  // resetAll () {
+  //   let { wbId, board } = this.state
+
+  //   this.setState({
+  //     clubNameOne: '',
+  //     clubNameTwo: '',
+  //     clubMarkOne: '',
+  //     clubMarkTwo: '',
+  //     playerNameOne: '',
+  //     playerNameTwo: '',
+  //     playerMarkOne: '',
+  //     playerMarkTwo: '',
+  //     firSilverOne: '',
+  //     secSilverOne: '',
+  //     thdSliverOne: '',
+  //     fthSliverOne: '',
+  //     goldOne: '',
+  //     firSilverTwo: '',
+  //     secSilverTwo: '',
+  //     thdSliverTwo: '',
+  //     fthSliverTwo: '',
+  //     goldTwo: '',
+  //     selectedBtn1: '未打',
+  //     selectedBtn2: '未打',
+  //     selectedBtn3: '未打',
+  //     selectedBtn4: '未打',
+  //     selectedBtn5: '未打',
+  //     selectedBtn6: '未打',
+  //     selectedBtn7: '未打',
+  //     selectedBtn8: '未打',
+  //     selectedBtn9: '未打',
+  //     selectedBtnx: '未打',
+  //     board:[
+  //       '', //俱乐部一名称
+  //       '', //俱乐部二名称
+  //       '', //俱乐部一得分
+  //       '', //俱乐部二得分
+  //       '', //选手一名称
+  //       '', //选手二名称
+  //       '', //选手一得分
+  //       '', //选手二得分
+  //       '', //选手一 银球一
+  //       '', //选手一 银球二
+  //       '', //选手一 银球三
+  //       '', //选手一 银球四
+  //       '', //选手一 金球
+  //       '', //选手二 金球
+  //       '', //选手二 银球四
+  //       '', //选手二 银球三
+  //       '', //选手二 银球二
+  //       '', //选手二 银球一
+  //       '未打', // 选手一 银球一 选择情况
+  //       '未打', // 选手一 银球二 选择情况
+  //       '未打', // 选手一 银球三 选择情况
+  //       '未打', // 选手一 银球四 选择情况
+  //       '未打', // 选手一 金球 选择情况
+  //       '未打', // 选手二 银球一 选择情况
+  //       '未打', // 选手二 银球二 选择情况
+  //       '未打', // 选手二 银球三 选择情况
+  //       '未打', // 选手二 银球四 选择情况
+  //       '未打', // 选手二 金球 选择情况
+  //     ]
+  //   })
+
+  //   console.log(this.state)
+
+  //   this.emitMessage(board)
+  //   // 发送数据到独立白板
+  //   if(this.state.wbId){
+  //     hyExt.stream.sendToExtraWhiteBoard({
+  //       wbId,
+  //       data: JSON.stringify(board),
+  //       // data: board
+  //     }).catch(
+  //       (err)=>{console.log(err)}
+  //     )
+  //     console.log("重置白板数据白板成功");
+  //   }
+  // }  
 
   
 
   handleScore1() {
 
-    
-    if (this.state.selectedBtn1 == '进') {
+    console.log(this.state.selectedBtn1)
+
+    let status = this.state.selectedBtn1
+    if (status == '进') {
       this.setState({firSilverOne: '✔'})
-    } else if (this.state.selectedBtn1 == '空') {
+    } else if (status == '空') {
       this.setState({firSilverOne: '✘'})
     } else {
       this.setState({firSilverOne: ''})
     }
-    
+
+    console.log(this.state.firSilverOne)
+
     // let {board, firSilverOne} = this.state
     // console.log(firSilverOne)
     // let temps = [...board]
@@ -544,22 +558,20 @@ class App extends Component {
   buttonSelected1 = selectedBtn1 => ev =>{
     this.setState({ selectedBtn1 })
 
-    let board = [...this.state.board]
-    let btn1 = {...board[18]}
-    btn1 = selectedBtn1
-    board[18] = btn1
-    this.setState({board})
+    console.log(selectedBtn1)
+
+    // if (this.state.selectedBtn1 == '进') {
+    //   this.setState({firSilverOne: '✔'})
+    // } else if (this.state.selectedBtn1 == '空') {
+    //   this.setState({firSilverOne: '✘'})
+    // } else {
+    //   this.setState({firSilverOne: ''})
+    // }
+
+    console.log(this.state.firSilverOne)
 
     // this.handleScore1()
     
-    if (this.state.selectedBtn1 == '进') {
-      this.setState({firSilverOne: '✔'})
-    } else if (this.state.selectedBtn1 == '空') {
-      this.setState({firSilverOne: '✘'})
-    } else {
-      this.setState({firSilverOne: ''})
-    }
-
   }
 
   buttonSelected2 = selectedBtn2 => ev =>{
